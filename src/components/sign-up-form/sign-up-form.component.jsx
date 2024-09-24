@@ -5,7 +5,8 @@ import {
 } from "../../utils/firebase/firebase.utils";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
-import './sign-up-form.styles.scss'
+import "./sign-up-form.styles.scss";
+
 const SignUpForm = () => {
   const defaultFormFields = {
     displayName: "",
@@ -25,15 +26,11 @@ const SignUpForm = () => {
     }
 
     try {
-      const response = await createAuthUserWithEmailAndPassword(
+      await createAuthUserWithEmailAndPassword(
         email,
         password
       );
-
-      const userDocument = await createUserDocumentFromAuth(response.user, {
-        displayName,
-      });
-      console.log(userDocument);
+     
       resetFormFields();
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
@@ -49,7 +46,7 @@ const SignUpForm = () => {
 
   return (
     <div className="sign-up-container">
-    <h2>Don't have an account?</h2>
+      <h2>Don't have an account?</h2>
       <span>Sign Up with your email and password</span>
       <form
         onSubmit={(event) => {
